@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <style type="text/css">body, table, tr, td, h1, h2, h3, p {font-family: Arial, Helvetica, sans-serif; color: #313236;} </style>
+</head>
+
+<body>
+
+<table width="500" border="0" cellpadding="0" style="font-size: 16px;"> <!-- container table for margins -->
+  <tr><td width="20" height="20"></td><td width="460" height="20"></td><td width="20" height="20"></td></tr>
+  <tr><td width="20"></td>
+  <td width="460">
+  <table width="460" border="0" cellpadding="0"> <!-- actual table containing informations -->
+
+		<tr><td width="2"></td><td width="200"></td><td width="2"></td><td width="254"></td><td width="2"></td></tr> <!-- initial structure -->
+
+		<!-- COURSE / ACCOMMODATION / TRANSFER -->
+
+		<tr><td width="2"></td> <!-- headline (first part)-->
+		<td colspan="3">
+			<h1 style="font-size: 22px; color: #0074D9; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Anmeldung zum Sprachkurs bei</h1>
+		</td>
+		<td width="2"></td>
+		</tr>
+
+		<tr><td width="2"></td> <!-- headline (second part: school name) -->
+		<td colspan="3">
+			<h1 style="font-size: 22px; color: #0074D9; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">{{ school_name }}</h1>
+		</td>
+		<td width="2"></td>
+		</tr>
+
+		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
+
+		<tr><td width="2"></td>
+		<td width="200"><b>Kurs</b></td>
+		<td width="2"></td>
+		<td width="254">{{ course }}</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+		<tr><td width="2"></td>
+		<td width="200"><b>Zusatzkurs</b></td>
+		<td width="2"></td>
+		<td width="254">{{ additional_course }}</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+		<tr><td width="2"></td>
+		<td width="200"><b>Sprachkenntnisse</b></td>
+		<td width="2"></td>
+		<td width="254">{{ level }}</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+
+		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
+
+		<tr><td width="2"></td>
+		<td width="200"><b>Kursbeginn</b></td>
+		<td width="2"></td>
+		<td width="254">{{ course_start }}</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+		<tr><td width="2"></td>
+		<td width="200"><b>Kursdauer in Wochen</b></td>
+		<td width="2"></td>
+		<td width="254">{{ course_length }}</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
+
+		
+		<tr><td width="2"></td>
+		<td width="200"><b>Unterkunft</b></td>
+		<td width="2"></td>
+		{{#if no_accommodation}}
+		<td width="254">Keine</td>
+		{{else}}
+		<td width="254">{{ accommodation }}</td>
+		{{/if}}
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+		<tr><td width="2"></td>
+		<td width="200"><b>Anreisetag</b></td>
+		<td width="2"></td>
+		<td width="254">{{ date_arrival }}</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
+
+		<tr><td width="2"></td>
+		<td width="200"><b>Transfer</b></td>
+		<td width="2"></td>
+		<td width="254">{{ airport_transfer }}
+					</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
+
+		<!-- PERSONAL DATA -->
+
+		<tr><td width="2"></td><!-- headline -->
+		<td colspan="3">
+			<h1 style="font-size: 22px; color: #0074D9; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Ihre persönlichen Daten</h1>
+		</td>
+		<td width="2"></td>
+		</tr>
+
+		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
+
+		<!-- EACH -->
+
+		<tr><td width="2"></td><td colspan="3"> <!-- sub-headline (H2) -->
+		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Persönliche Daten</h2>
+		</td><td width="2"></td></tr>
+
+		<tr><td colspan="5" height="5"></td></tr> <!-- empty row (5) -->
+
+		<tr><td width="2"></td>
+		<td width="200"><b>Anrede</b></td>
+		<td width="2"></td>
+		<td width="254">{{ gender }}</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+
+		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
+
+		{{#if privacy_policy_checked}}
+				<p>BAR</p>
+		{{/if}}
+
+		<!-- END EACH -->
+
+  </table>
+	</td>
+	<td width="20"></td></tr>
+	<tr><td width="20" height="20"></td><td width="460" height="20"></td><td width="20" height="20"></td></tr>
+</table>
+
+</body>
+</html>
