@@ -40,7 +40,7 @@
 		<td width="2"></td>
 		</tr>
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
-
+		{{#if additional_course}}
 		<tr><td width="2"></td>
 		<td width="200"><b>Zusatzkurs</b></td>
 		<td width="2"></td>
@@ -48,7 +48,7 @@
 		<td width="2"></td>
 		</tr>
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
-
+		{{/if}}
 		<tr><td width="2"></td>
 		<td width="200"><b>Sprachkenntnisse</b></td>
 		<td width="2"></td>
@@ -56,7 +56,6 @@
 		<td width="2"></td>
 		</tr>
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
-
 
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 
@@ -90,22 +89,33 @@
 		<td width="2"></td>
 		</tr>
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
-
+		{{#unless no_accommodation}}
 		<tr><td width="2"></td>
-		<td width="200"><b>Anreisetag</b></td>
+		<td width="200"><b>Anreisedatum</b></td>
 		<td width="2"></td>
-		<td width="254">{{ date_arrival }}</td>
+		<td width="254">{{ accommodation_arrival }}</td>
 		<td width="2"></td>
 		</tr>
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+		<tr><td width="2"></td>
+		<td width="200"><b>Abreisedatum</b></td>
+		<td width="2"></td>
+		<td width="254">{{ accommodation_departure }}</td>
+		<td width="2"></td>
+		</tr>
+		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
+		{{/unless}}
 
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 
 		<tr><td width="2"></td>
 		<td width="200"><b>Transfer</b></td>
 		<td width="2"></td>
-		<td width="254">{{ airport_transfer }}
-					</td>
+		{{#if no_transfer}}
+		<td width="254">Nein</td>
+		{{else}}
+		<td width="254">{{ airport_transfer }}</td>
+		{{/if}}
 		<td width="2"></td>
 		</tr>
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
