@@ -7,7 +7,6 @@ $school_name = "Example School";
 $path_to_backend = "../backend/";
 $redirect = "A-Buchung.html";
 
-
 /*******************************************/
 
 // DO NOT CHANGE THIS LINE:
