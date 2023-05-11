@@ -19,7 +19,7 @@
 
 		<tr><td width="2"></td> <!-- headline (first part)-->
 		<td colspan="3">
-			<h1 style="font-size: 22px; color: #0074D9; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Anmeldung zum Sprachkurs bei</h1>
+			<h1 style="font-size: 22px; color: #0074D9; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Enrollment for</h1>
 		</td>
 		<td width="2"></td>
 		</tr>
@@ -34,7 +34,7 @@
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 		{{#if location}}
 		<tr><td width="2"></td>
-		<td width="200"><b>Kursort</b></td>
+		<td width="200"><b>Location</b></td>
 		<td width="2"></td>
 		<td width="254">{{ location }}</td>
 		<td width="2"></td>
@@ -42,7 +42,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 		{{/if}}
 		<tr><td width="2"></td>
-		<td width="200"><b>Kurs</b></td>
+		<td width="200"><b>Course</b></td>
 		<td width="2"></td>
 		<td width="254">{{ course }}</td>
 		<td width="2"></td>
@@ -50,7 +50,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 		{{#if additional_course}}
 		<tr><td width="2"></td>
-		<td width="200"><b>Zusatzkurs</b></td>
+		<td width="200"><b>Additional Course</b></td>
 		<td width="2"></td>
 		<td width="254">{{ additional_course }}</td>
 		<td width="2"></td>
@@ -58,7 +58,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 		{{/if}}
 		<tr><td width="2"></td>
-		<td width="200"><b>Sprachkenntnisse</b></td>
+		<td width="200"><b>Level</b></td>
 		<td width="2"></td>
 		<td width="254">{{ level }}</td>
 		<td width="2"></td>
@@ -68,7 +68,7 @@
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Kursbeginn</b></td>
+		<td width="200"><b>Start</b></td>
 		<td width="2"></td>
 		<td width="254">{{ course_start }}</td>
 		<td width="2"></td>
@@ -76,7 +76,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Kursdauer in Wochen</b></td>
+		<td width="200"><b>Duration in Weeks</b></td>
 		<td width="2"></td>
 		<td width="254">{{ course_length }}</td>
 		<td width="2"></td>
@@ -87,10 +87,10 @@
 
 		
 		<tr><td width="2"></td>
-		<td width="200"><b>Unterkunft</b></td>
+		<td width="200"><b>Accommodation</b></td>
 		<td width="2"></td>
 		{{#if no_accommodation}}
-		<td width="254">Keine</td>
+		<td width="254">None</td>
 		{{else}}
 		<td width="254">{{ accommodation }}</td>
 		{{/if}}
@@ -99,14 +99,14 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 		{{#unless no_accommodation}}
 		<tr><td width="2"></td>
-		<td width="200"><b>Anreisedatum</b></td>
+		<td width="200"><b>Arrival</b></td>
 		<td width="2"></td>
 		<td width="254">{{ accommodation_arrival }}</td>
 		<td width="2"></td>
 		</tr>
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 		<tr><td width="2"></td>
-		<td width="200"><b>Abreisedatum</b></td>
+		<td width="200"><b>Departure</b></td>
 		<td width="2"></td>
 		<td width="254">{{ accommodation_departure }}</td>
 		<td width="2"></td>
@@ -120,7 +120,7 @@
 		<td width="200"><b>Transfer</b></td>
 		<td width="2"></td>
 		{{#if no_transfer}}
-		<td width="254">Nein</td>
+		<td width="254">None</td>
 		{{else}}
 		<td width="254">{{ airport_transfer }}</td>
 		{{/if}}
@@ -134,7 +134,7 @@
 
 		<tr><td width="2"></td><!-- headline -->
 		<td colspan="3">
-			<h1 style="font-size: 22px; color: #0074D9; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Ihre persönlichen Daten</h1>
+			<h1 style="font-size: 22px; color: #0074D9; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Personal Data</h1>
 		</td>
 		<td width="2"></td>
 		</tr>
@@ -142,13 +142,13 @@
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 
 		<tr><td width="2"></td><td colspan="3"> <!-- sub-headline (H2) -->
-		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Persönliche Daten</h2>
+		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Personal Data</h2>
 		</td><td width="2"></td></tr>
 
 		<tr><td colspan="5" height="5"></td></tr> <!-- empty row (5) -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Anrede</b></td>
+		<td width="200"><b>Title</b></td>
 		<td width="2"></td>
 		<td width="254">{{ gender }}</td>
 		<td width="2"></td>
@@ -156,7 +156,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Vorname</b></td>
+		<td width="200"><b>First Name</b></td>
 		<td width="2"></td>
 		<td width="254">{{ firstname }}</td>
 		<td width="2"></td>
@@ -164,7 +164,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Nachname</b></td>
+		<td width="200"><b>Last Name</b></td>
 		<td width="2"></td>
 		<td width="254">{{ lastname }}</td>
 		<td width="2"></td>
@@ -172,7 +172,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Geburtsdatum</b></td>
+		<td width="200"><b>Date of Birth</b></td>
 		<td width="2"></td>
 		<td width="254">{{ date_of_birth }}</td>
 		<td width="2"></td>
@@ -180,7 +180,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Nationalität</b></td>
+		<td width="200"><b>Nationality</b></td>
 		<td width="2"></td>
 		<td width="254">{{ nationality }}</td>
 		<td width="2"></td>
@@ -188,7 +188,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Beruf</b></td>
+		<td width="200"><b>Occupation</b></td>
 		<td width="2"></td>
 		<td width="254">{{ occupation }}</td>
 		<td width="2"></td>
@@ -198,13 +198,13 @@
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 
 		<tr><td width="2"></td><td colspan="3"> <!-- sub-headline (H2) -->
-		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Adresse</h2>
+		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Address</h2>
 		</td><td width="2"></td></tr>
 
 		<tr><td colspan="5" height="5"></td></tr> <!-- empty row (5) -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Strasse, Nr.</b></td>
+		<td width="200"><b>Street, Nr.</b></td>
 		<td width="2"></td>
 		<td width="254">{{ address }}</td>
 		<td width="2"></td>
@@ -212,7 +212,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Stadt</b></td>
+		<td width="200"><b>City</b></td>
 		<td width="2"></td>
 		<td width="254">{{ city }}</td>
 		<td width="2"></td>
@@ -220,7 +220,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Postleitzahl</b></td>
+		<td width="200"><b>ZIP</b></td>
 		<td width="2"></td>
 		<td width="254">{{ zip_code }}</td>
 		<td width="2"></td>
@@ -228,7 +228,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 		{{#if address_suffix}}
 		<tr><td width="2"></td>
-		<td width="200"><b>Adresszusatz</b></td>
+		<td width="200"><b>Address Addition</b></td>
 		<td width="2"></td>
 		<td width="254">{{ address_suffix }}</td>
 		<td width="2"></td>
@@ -236,7 +236,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 		{{/if}}
 		<tr><td width="2"></td>
-		<td width="200"><b>Land</b></td>
+		<td width="200"><b>Country</b></td>
 		<td width="2"></td>
 		<td width="254">{{ country }}</td>
 		<td width="2"></td>
@@ -246,13 +246,13 @@
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 
 		<tr><td width="2"></td><td colspan="3"> <!-- sub-headline (H2) -->
-		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Kontakt</h2>
+		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Contact</h2>
 		</td><td width="2"></td></tr>
 
 		<tr><td colspan="5" height="5"></td></tr> <!-- empty row (5) -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Telefonnummer</b></td>
+		<td width="200"><b>Phone</b></td>
 		<td width="2"></td>
 		<td width="254">{{ phone }}</td>
 		<td width="2"></td>
@@ -270,13 +270,13 @@
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 		{{#if extras}}
 		<tr><td width="2"></td><td colspan="3"> <!-- sub-headline (H2) -->
-		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Sonstiges</h2>
+		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Other</h2>
 		</td><td width="2"></td></tr>
 
 		<tr><td colspan="5" height="5"></td></tr> <!-- empty row (5) -->
 		{{#each extras}}
 		<tr><td width="2"></td>
-		<td width="200"><b>{{ de }}</b></td>
+		<td width="200"><b>{{ en }}</b></td>
 		<td width="2"></td>
 		<td width="254">{{ val }}</td>
 		<td width="2"></td>
@@ -287,13 +287,13 @@
 		<tr><td colspan="5" height="20"></td></tr> <!-- empty row -->
 		{{/if}}
 		<tr><td width="2"></td><td colspan="3"> <!-- sub-headline (H2) -->
-		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Hinweise</h2>
+		<h2 style="font-size:19px; font-family: Arial, Helvetica, sans-serif; margin: 0; mso-line-height-rule: exactly;">Comments</h2>
 		</td><td width="2"></td></tr>
 
 		<tr><td colspan="5" height="5"></td></tr> <!-- empty row (5) -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Kommentar/Anmerkung zum Kurs</b></td>
+		<td width="200"><b>Comment Course</b></td>
 		<td width="2"></td>
 		<td width="254">{{ course_comment }}</td>
 		<td width="2"></td>
@@ -301,7 +301,7 @@
 		<tr><td colspan="5" bgcolor="#E5E5E5" height="1"></td></tr> <!-- grey line -->
 
 		<tr><td width="2"></td>
-		<td width="200"><b>Kommentar/Anmerkung zur Unterkunft</b></td>
+		<td width="200"><b>Comment Accommodation</b></td>
 		<td width="2"></td>
 		<td width="254">{{ accommodation_comment }}</td>
 		<td width="2"></td>
