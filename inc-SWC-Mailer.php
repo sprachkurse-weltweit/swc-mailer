@@ -20,13 +20,16 @@ if (!array_key_exists('email_from', $_POST)) {    // checks if 'email_from' exis
 	die('Error: "email_from" field not set!');  // kill script
 }
 
-composeMail("Buchung", $template_de);      // send german mail
-composeMail("Booking", $template_en);     // send english mail
+composeMail("DE");                         // send german mail
+composeMail("EN");                        // send english mail
 autoRespond();                           // send auto-responder mail
 header("Location: " . $redirect);       // redirect -> back to homepage
 
-function composeMail($post_type, $template){
-  global $_POST, $send_to, $school_name, $path_to_backend, $redirect;
+function composeMail($lang){
+  global $_POST, $send_to, $school_name, $path_to_backend, $redirect, $template_de, $template_en;
+
+  $template = ($lang == "DE") ? $template_de : $template_en;
+  $post_type = ($lang == "DE") ? "Buchung" : "Booking";
 
   $firstname = htmlspecialchars($_POST['firstname']);
   $lastname = htmlspecialchars($_POST['lastname']);
@@ -72,20 +75,26 @@ function composeMail($post_type, $template){
   foreach($_POST as $name => $value) {
     // extra fields
     if(strpos($name, '*') !== false){
+      // format: split @ * -> replace _ with space -> uppercase words
+      $base = ($lang == "DE") ? explode('*',$name)[1] : explode('*',$name)[0];
+      $formated = ucwords(str_replace("_", " ", $base));
+      // add formated string to array
       array_push($form_array['extras'], array(
-        // split @ * -> replace _ with space -> uppercase words 
-        "en" => ucwords(str_replace("_", " ", explode('*',$name)[0])),
-        "de" => ucwords(str_replace("_", " ", explode('*',$name)[1])),
+        "key" => $formated,
         "val" => $value
       ));
     }
+    // values that need translation
+    elseif(in_array($name, ["gender", "level"])) {
+      $form_array[$name] = ($lang == "DE") ? formatVal($value)[0] : formatVal($value)[1];
+    }
     // normal fields
     else {
-      $form_array[$name]=$value;
+      $form_array[$name] = $value;
     }
   }
   // add school name to main array
-  $form_array['school_name']=$school_name;
+  $form_array['school_name'] = $school_name;
 
   // render template and set mail body
   $mail->Body = $handlebars->render($template, $form_array);
@@ -102,6 +111,25 @@ function composeMail($post_type, $template){
 
     die("Leider konnte Ihre Email nicht zugestellt werden. Das tut uns leid! <br />Bitte versuchen Sie es zu einem sp&auml;teren Zeitpunkt noch einmal oder kontaktieren Sie uns telefonisch unter +49 (0)9473 951 550.<br /><br />");
 
+  }
+}
+
+/**************** VALUE FORMATING ************/
+
+function formatVal($val){
+  switch($val){
+    // gender
+    case "male": return ["Herr", "Mr"];
+    case "female": return ["Frau", "Ms"];
+    case "div": return ["Divers", "Diverse"];
+    // level
+    case "A0": return ["Absoluter Anfänger (A0)", "Complete Beginner (A0)"];
+    case "A1": return ["Geringe Kenntnisse (A1)", "Beginner (A1)"];
+    case "A2": return ["Grundlagen (A2)", "Elementary (A2)"];
+    case "B1": return ["Durchschnittlich (B1)", "Intermediate (B1)"];
+    case "B2": return ["Gut (B2)", "High (B2)"];
+    case "C1_C2": return ["Fortgeschritten (C1/C2)", "Advanced (C1/C2)"];
+    default: return [$val, $val];
   }
 }
 
