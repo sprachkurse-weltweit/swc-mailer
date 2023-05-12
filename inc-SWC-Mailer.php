@@ -73,8 +73,9 @@ function composeMail($post_type, $template){
     // extra fields
     if(strpos($name, '*') !== false){
       array_push($form_array['extras'], array(
-        "en" => explode('*',$name)[0],
-        "de" => explode('*',$name)[1],
+        // split @ * -> replace _ with space -> uppercase words 
+        "en" => ucwords(str_replace("_", " ", explode('*',$name)[0])),
+        "de" => ucwords(str_replace("_", " ", explode('*',$name)[1])),
         "val" => $value
       ));
     }
