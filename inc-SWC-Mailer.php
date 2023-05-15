@@ -71,6 +71,9 @@ function composeMail($lang){
 
   $mail->isHTML(true);
 
+  // add school name to main array
+  $form_array['school_name'] = $school_name;
+
   // add key value pairs to main array
   foreach($_POST as $name => $value) {
     // extra fields
@@ -93,14 +96,59 @@ function composeMail($lang){
       $form_array[$name] = $value;
     }
   }
-  // add school name to main array
-  $form_array['school_name'] = $school_name;
 
   // render template and set mail body
   $mail->Body = $handlebars->render($template, $form_array);
 
-  // no plain text fallback yet
-  # $mail->AltBody = $PLAIN;
+  /*************** PLAIN TEXT FALLBACK *****************/
+
+  $plain_array = $form_array;
+
+  // format extras
+  foreach($plain_array["extras"] as $extra){
+    $plain_array[$extra["key"]] = $extra["val"];
+  }
+
+  // delete unneccessary keys
+  $unsetList = array("no_accommodation", "no_transfer", "agb_checked", "privacy_policy_checked", "extras", "school_name", "location");
+
+  foreach($unsetList as $item){
+    unset($plain_array[$item]);
+  }
+
+  // create plain text mail body
+  $plainBody = "Booking: " . $school_name;
+  if(strlen($location)){
+    $plainBody .= " " . $location;
+  }
+  $plainBody .= "\n\n";
+  $maxlen = 0;
+
+  // check the longest name input
+  foreach($plain_array as $name => $value) {
+    $nlen = strlen($name);
+    if ($nlen > $maxlen) {$maxlen = $nlen;}
+  }
+
+  // insert key/value list
+  foreach($plain_array as $name => $value) {
+    $nlen = strlen($name);
+    $name = ucwords(preg_replace('/_/', ' ', htmlspecialchars($name)));
+
+    $fill = str_repeat('.', $maxlen - $nlen);
+
+    if(is_array($value)) {
+      $plainBody .= $name . "$fill...: ";
+      $plainBody .= htmlspecialchars(implode(", ", $value)) . "\n";
+    }
+    else {
+      $plainBody .= $name . "$fill...: " . htmlspecialchars($value) . "\n";
+    }
+    
+  }
+
+  // set mail alt body
+  $mail->AltBody = $plainBody;
 
   /****************** ERRORS *****************/
 
