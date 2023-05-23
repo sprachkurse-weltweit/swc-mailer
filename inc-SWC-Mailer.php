@@ -23,7 +23,9 @@ if (!array_key_exists('email_from', $_POST)) {    // checks if 'email_from' exis
 composeMail("DE");                         // send german mail
 composeMail("EN");                        // send english mail
 autoRespond();                           // send auto-responder mail
-header("Location: " . $redirect);       // redirect -> back to homepage
+
+echo "<script>window.location.href='" . $redirect . "';</script>"; 
+exit; // redirect -> back to homepage -> exit script
 
 function composeMail($lang){
   global $_POST, $send_to, $school_name, $path_to_backend, $redirect, $template_de, $template_en;
