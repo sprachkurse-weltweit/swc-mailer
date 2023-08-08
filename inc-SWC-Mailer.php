@@ -28,7 +28,7 @@ echo "<script>window.location.href='" . $redirect . "';</script>";
 exit; // redirect -> back to homepage -> exit script
 
 function composeMail($lang){
-  global $_POST, $send_to, $school_name, $path_to_backend, $redirect, $template_de, $template_en;
+  global $_POST, $send_to, $school_name, $path_to_backend, $redirect, $template_de, $template_en, $curry_id;
 
   $template = ($lang == "DE") ? $template_de : $template_en;
   $post_type = ($lang == "DE") ? "Buchung" : "Booking";
@@ -57,6 +57,23 @@ function composeMail($lang){
   
     die("<div style='color: red;'>Ung&uuml;ltige Email-Adresse.</div><br /> Bitte geben Sie eine g&uuml;ltige Email-Adresse ein.<br /><a href='javascript: history.back(-1)'>Zur&uuml;ck</a>");
 
+  }
+
+  // use curry id to get school email reply to adress from curry db
+  // (english version only)
+  if($lang == "EN"){
+    // clear all reply-tos
+    $mail->ClearReplyTos();
+    if(isset($curry_id) && $curry_id){
+      // get school email adress from curry db
+      $curry_data = url_get_contents("https://api.sww.curry-software.com/api/school/" . $curry_id);
+      $json = json_decode($curry_data);
+      $school_email = $json->email;
+      if($school_email){
+        // set adress as reply to
+        $mail->addReplyTo($school_email, $school_name);
+      }
+    }
   }
     
   $subject = $post_type . ": " . $school_name;
@@ -162,6 +179,20 @@ function composeMail($lang){
     die("Leider konnte Ihre Email nicht zugestellt werden. Das tut uns leid! <br />Bitte versuchen Sie es zu einem sp&auml;teren Zeitpunkt noch einmal oder kontaktieren Sie uns telefonisch unter +49 (0)9473 951 550.<br /><br />");
 
   }
+}
+
+/****************** CURL API *****************/
+
+function url_get_contents ($Url) {
+  if (!function_exists('curl_init')){ 
+      return FALSE;
+  }
+  $ch = curl_init();
+  curl_setopt($ch, CURLOPT_URL, $Url);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  $output = curl_exec($ch);
+  curl_close($ch);
+  return $output;
 }
 
 /**************** VALUE FORMATING ************/
