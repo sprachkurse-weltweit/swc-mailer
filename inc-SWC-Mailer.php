@@ -235,7 +235,7 @@ function autoRespond(){
   
   $signup_respond = $path_to_backend . 'SWC-Mailer/signup_respond.html';
   
-  $ar_subject = utf8_encode("Anmeldung zum Sprachkurs bei " . $school_name);
+  $ar_subject = "Anmeldung zum Sprachkurs bei " . $school_name;
   if(strlen($location)){
     $ar_subject .= " " . $location;
   }
