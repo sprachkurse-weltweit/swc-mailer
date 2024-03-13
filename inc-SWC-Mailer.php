@@ -13,6 +13,13 @@ use PHPMailer\PHPMailer\Exception;
 $template_de = file_get_contents($path_to_backend . 'SWC-Mailer/enroll_de.hbs');
 $template_en = file_get_contents($path_to_backend . 'SWC-Mailer/enroll_en.hbs');
 
+// honeypot bot trap
+if(!isset($_POST['email']) || !empty($_POST['email'])) {
+  echo 'Thank you for your request!';
+  sleep(5);
+  exit;
+}
+
 if (!array_key_exists('email_from', $_POST)) {    // checks if 'email_from' exists
 
 	// echo "Mailer Error: " . $mail->ErrorInfo;  // uncomment to DEBUG
