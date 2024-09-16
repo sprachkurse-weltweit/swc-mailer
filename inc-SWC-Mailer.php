@@ -72,17 +72,17 @@ function composeMail($lang){
     // clear all reply-tos
     $mail->ClearReplyTos();
     if(isset($curry_id) && $curry_id){
-      // get school email adress from curry db / omit it when an error occurs
-      try {
-        $curry_data = url_get_contents("https://api.sww.curry-software.com/api/school/" . $curry_id);
+      // get school email adress from curry db
+      $curry_data = url_get_contents("https://api.sww.curry-software.com/api/school/" . $curry_id);
+      if($curry_data) {
         $json = json_decode($curry_data);
-        $school_email = $json->email;
-        if($school_email){
-          // set adress as reply to
-          $mail->addReplyTo($school_email, $school_name);
+        if($json && isset($json->email)) {
+          $school_email = $json->email;
+          if($school_email){
+            // set adress as reply to
+            $mail->addReplyTo($school_email, $school_name);
+          }
         }
-      } catch (Exception $e) {
-        // do nothing
       }
     }
   }
