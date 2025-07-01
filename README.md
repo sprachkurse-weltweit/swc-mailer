@@ -1,7 +1,8 @@
 # SWC Mailer
 
-Needs handlebars-php fork installed: 
+- Needs handlebars-php fork installed: 
 ``` 
 git clone https://github.com/sprachkurse-weltweit/handlebars-php.git
 ```
-Needs cURL extension!
+- Needs cURL extension!
+- Needs an `env.php` file (see `/env.php.example`)
