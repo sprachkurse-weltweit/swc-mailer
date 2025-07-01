@@ -38,7 +38,7 @@ echo "<script>window.location.href='" . $redirect . "';</script>";
 exit; // redirect -> back to homepage -> exit script
 
 // setup SMTP
-function setupSMTP($mail) {
+function setupSMTP($mail, $from_name) {
   global $env;
   $mail->isSMTP();
   $mail->Host       = $env['smtp_host'];
@@ -48,7 +48,7 @@ function setupSMTP($mail) {
   $mail->SMTPSecure = 'ssl';
   $mail->Port       = 465;
 
-  $mail->setFrom($env['smtp_email'], $env['smtp_from_name']);
+  $mail->setFrom($env['smtp_email'], $from_name ? $from_name : $env['smtp_email']);
   $mail->CharSet = 'UTF-8';
 }
 
@@ -68,7 +68,9 @@ function composeMail($lang){
 
   $mail = new PHPMailer;
 
-  setupSMTP($mail);
+  $from_name = strtoupper($post_type);
+
+  setupSMTP($mail, $from_name);
 
   $mail->addAddress($send_to);
 
@@ -248,7 +250,7 @@ function autoRespond(){
 
   $mail = new PHPMailer;
   
-  setupSMTP($mail);
+  setupSMTP($mail, null);
 
   $mail->addAddress(htmlspecialchars($_POST['email_from']));
   
