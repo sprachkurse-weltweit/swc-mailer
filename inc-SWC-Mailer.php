@@ -52,14 +52,13 @@ function setupSMTP($mail) {
 }
 
 function composeMail($lang){
-  global $_POST, $env, $send_to, $school_name, $path_to_backend, $redirect, $template_de, $template_en, $curry_id;
+  global $_POST, $env, $send_to, $school_name, $template_de, $template_en, $curry_id;
 
   $template = ($lang == "DE") ? $template_de : $template_en;
   $post_type = ($lang == "DE") ? "Buchung" : "Booking";
 
   $firstname = htmlspecialchars($_POST['firstname']);
   $lastname = htmlspecialchars($_POST['lastname']);
-  $send_from = htmlspecialchars($_POST['email_from']);
   $location = htmlspecialchars($_POST['location']);
 
   $handlebars = new Handlebars();
@@ -242,7 +241,7 @@ function formatVal($val){
 /*************** AUTO RESPONDER *************/
 
 function autoRespond(){
-  global $_POST, $send_to, $school_name, $path_to_backend, $redirect;
+  global $_POST, $school_name, $path_to_backend;
 
   $location = htmlspecialchars($_POST['location']);
 
