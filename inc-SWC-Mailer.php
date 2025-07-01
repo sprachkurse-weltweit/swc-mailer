@@ -3,6 +3,7 @@
 require $path_to_backend . 'SWC-Mailer/handlebars-php/src/Handlebars/Autoloader.php';
 require $path_to_backend . 'PHPMailer/src/Exception.php';
 require $path_to_backend . 'PHPMailer/src/PHPMailer.php';
+require $path_to_backend . 'PHPMailer/src/SMTP.php';
 
 Handlebars\Autoloader::register();
 
