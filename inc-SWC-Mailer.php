@@ -10,6 +10,8 @@ use Handlebars\Handlebars;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+$env = require $path_to_backend . 'SWC-Mailer/env.php';
+
 $template_de = file_get_contents($path_to_backend . 'SWC-Mailer/enroll_de.hbs');
 $template_en = file_get_contents($path_to_backend . 'SWC-Mailer/enroll_en.hbs');
 
@@ -34,8 +36,23 @@ autoRespond();                           // send auto-responder mail
 echo "<script>window.location.href='" . $redirect . "';</script>"; 
 exit; // redirect -> back to homepage -> exit script
 
+// setup SMTP
+function setupSMTP($mail) {
+  global $env;
+  $mail->isSMTP();
+  $mail->Host       = $env['smtp_host'];
+  $mail->SMTPAuth   = true;
+  $mail->Username   = $env['smtp_email'];
+  $mail->Password   = $env['smtp_password'];
+  $mail->SMTPSecure = 'ssl';
+  $mail->Port       = 465;
+
+  $mail->setFrom($env['smtp_email'], $env['smtp_from_name']);
+  $mail->CharSet = 'UTF-8';
+}
+
 function composeMail($lang){
-  global $_POST, $send_to, $school_name, $path_to_backend, $redirect, $template_de, $template_en, $curry_id;
+  global $_POST, $env, $send_to, $school_name, $path_to_backend, $redirect, $template_de, $template_en, $curry_id;
 
   $template = ($lang == "DE") ? $template_de : $template_en;
   $post_type = ($lang == "DE") ? "Buchung" : "Booking";
@@ -51,10 +68,7 @@ function composeMail($lang){
 
   $mail = new PHPMailer;
 
-  $mail->isMail();
-  $mail->CharSet = 'UTF-8';
-
-  $mail->setFrom($send_to, '', false);
+  setupSMTP($mail);
 
   $mail->addAddress($send_to);
 
@@ -73,7 +87,7 @@ function composeMail($lang){
     $mail->ClearReplyTos();
     if(isset($curry_id) && $curry_id){
       // get school email adress from curry db
-      $curry_data = url_get_contents("https://api.sww.curry-software.com/api/school/" . $curry_id);
+      $curry_data = url_get_contents($env['curry_api_base_url'] . $curry_id);
       if($curry_data) {
         $json = json_decode($curry_data);
         if($json && isset($json->email)) {
@@ -233,12 +247,9 @@ function autoRespond(){
   $location = htmlspecialchars($_POST['location']);
 
   $mail = new PHPMailer;
-
-  $mail->isMail();
-  $mail->CharSet = 'UTF-8';
   
-  $mail->setFrom($send_to, "", false);
-  $mail->addReplyTo($send_to);
+  setupSMTP($mail);
+
   $mail->addAddress(htmlspecialchars($_POST['email_from']));
   
   $mail->addEmbeddedImage($path_to_backend . 'SWC-Mailer/img/logo.png', 'logo');
