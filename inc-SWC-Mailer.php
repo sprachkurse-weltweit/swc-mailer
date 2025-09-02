@@ -17,7 +17,7 @@ $template_de = file_get_contents($path_to_backend . 'SWC-Mailer/enroll_de.hbs');
 $template_en = file_get_contents($path_to_backend . 'SWC-Mailer/enroll_en.hbs');
 
 // honeypot bot trap
-if(array_key_exists('email', $_POST) && !empty($_POST['email'])) {
+if(array_key_exists('contact_notes', $_POST) && !empty($_POST['contact_notes'])) {
   echo 'Thank you for your request!';
   sleep(5);
   exit;
