@@ -45,7 +45,7 @@ function setupSMTP($mail, $from_name) {
   $mail->SMTPAuth   = true;
   $mail->Username   = $env['smtp_email'];
   $mail->Password   = $env['smtp_password'];
-  $mail->SMTPSecure = 'ssl';
+  $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
   $mail->Port       = 465;
 
   $mail->setFrom($env['smtp_email'], $from_name ? $from_name : $env['smtp_email']);
@@ -58,15 +58,15 @@ function composeMail($lang){
   $template = ($lang == "DE") ? $template_de : $template_en;
   $post_type = ($lang == "DE") ? "Buchung" : "Booking";
 
-  $firstname = htmlspecialchars($_POST['firstname']);
-  $lastname = htmlspecialchars($_POST['lastname']);
-  $location = htmlspecialchars($_POST['location']);
+  $firstname = htmlspecialchars($_POST['firstname'] ?? '');
+  $lastname  = htmlspecialchars($_POST['lastname']  ?? '');
+  $location  = htmlspecialchars($_POST['location']  ?? '');
 
   $handlebars = new Handlebars();
   $form_array = array();
   $form_array['extras'] = array();
 
-  $mail = new PHPMailer;
+  $mail = new PHPMailer();
 
   $from_name = strtoupper($post_type);
 
@@ -74,7 +74,7 @@ function composeMail($lang){
 
   $mail->addAddress($send_to);
 
-  if (!$mail->addReplyTo($_POST['email_from'])) {    // email validation 
+  if (!$mail->addReplyTo($_POST['email_from'] ?? '')) {    // email validation 
 
     // echo "Mailer Error: " . $mail->ErrorInfo;   // uncomment to DEBUG
   
@@ -86,7 +86,7 @@ function composeMail($lang){
   // (english version only)
   if($lang == "EN"){
     // clear all reply-tos
-    $mail->ClearReplyTos();
+    $mail->clearReplyTos();
     if(isset($curry_id) && $curry_id){
       // get school email adress from curry db
       $curry_data = url_get_contents($env['curry_api_base_url'] . $curry_id);
@@ -128,10 +128,10 @@ function composeMail($lang){
       $base = ($lang == "DE") ? explode('*',$name)[1] : explode('*',$name)[0];
       $formated = ucwords(str_replace("_", " ", $base));
       // add formated string to array
-      array_push($form_array['extras'], array(
-        "key" => $formated,
-        "val" => $value
-      ));
+      $form_array['extras'][] = [
+          "key" => $formated,
+          "val" => $value
+      ];
     }
     // values that need translation
     elseif(in_array($name, ["gender", "level"])) {
@@ -254,13 +254,13 @@ function formatVal($val){
 function autoRespond(){
   global $_POST, $school_name, $path_to_backend;
 
-  $location = htmlspecialchars($_POST['location']);
+  $location = htmlspecialchars($_POST['location'] ?? '');
 
-  $mail = new PHPMailer;
+  $mail = new PHPMailer();
   
   setupSMTP($mail, null);
 
-  $mail->addAddress(htmlspecialchars($_POST['email_from']));
+  $mail->addAddress(htmlspecialchars($_POST['email_from'] ?? ''));
   
   $mail->addEmbeddedImage($path_to_backend . 'SWC-Mailer/img/logo.png', 'logo');
   $mail->addEmbeddedImage($path_to_backend . 'SWC-Mailer/img/check.png', 'check');
