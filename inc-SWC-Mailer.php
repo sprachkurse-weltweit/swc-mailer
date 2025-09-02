@@ -198,6 +198,8 @@ function composeMail($lang){
 
   /****************** ERRORS *****************/
 
+try {
+
   // send the message, check for errors
   if (!$mail->send()) { 
 
@@ -206,6 +208,12 @@ function composeMail($lang){
     die("Leider konnte Ihre Email nicht zugestellt werden. Das tut uns leid! <br />Bitte versuchen Sie es zu einem sp&auml;teren Zeitpunkt noch einmal oder kontaktieren Sie uns telefonisch unter +49 (0)9473 951 550.<br /><br />");
 
   }
+
+} catch (Exception $e) {
+  error_log("PHPMailer Exception: " . $e->getMessage());
+  die("Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+}
+
 }
 
 /****************** CURL API *****************/
@@ -282,6 +290,8 @@ function autoRespond(){
   
   /****************** ERRORS *****************/
 
+  try {
+
   // send the message, check for errors
   if (!$mail->send()) {
 
@@ -292,6 +302,12 @@ function autoRespond(){
     sleep(5);
 
   }
+
+  } catch (Exception $e) {
+    error_log("PHPMailer Exception: " . $e->getMessage());
+    die("Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+  }
+
 }
 
 ?>
