@@ -11,3 +11,11 @@ git clone https://github.com/sprachkurse-weltweit/handlebars-php.git
 ```
 - Needs cURL extension!
 - Needs an `env.php` file (see `/env.php.example`)
+
+## Project structure
+```text
+public_html/backend/
+├─ PHPMailer6/
+└─ SWC-Mailer/
+   └─ handlebars-php/
+```
